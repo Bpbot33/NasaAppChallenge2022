@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { FilterModal } from '../FilterModal'
 import { SearchBoxInput, SearchBoxInputContainer, SearchBoxWrapper, SearchButton, SearchFilterIcon, SearchIcon } from './SearchBox.styles'
 
 export const SearchBox = () => {
@@ -23,6 +24,7 @@ export const SearchBox = () => {
                 <SearchIcon />
                 <SearchFilterIcon onClick={() => console.log("Orejitaa")} />
             </SearchBoxInputContainer>
+            <FilterModal />
         </SearchBoxWrapper>
 
     )
