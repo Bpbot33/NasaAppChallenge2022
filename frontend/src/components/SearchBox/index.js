@@ -1,31 +1,40 @@
-import React, { useEffect, useState } from 'react'
-import { FilterModal } from '../FilterModal'
-import { SearchBoxInput, SearchBoxInputContainer, SearchBoxWrapper, SearchButton, SearchFilterIcon, SearchIcon } from './SearchBox.styles'
+import React, { useState } from "react";
+import { FilterModal } from "../FilterModal";
+import {
+  SearchBoxInput,
+  SearchBoxInputContainer,
+  SearchBoxWrapper,
+  SearchButton,
+  SearchFilterIcon,
+  SearchIcon,
+} from "./SearchBox.styles";
 
 export const SearchBox = () => {
-    const [value, setValue] = useState("")
+  const [value, setValue] = useState("");
 
-    const handleSubmmit = () => {
-        console.log("Submmit");
-    }
+  const [show, setShow] = useState(false);
 
-    useEffect(() => {
+  const handleSubmmit = () => {
+    console.log("Submmit");
+  };
 
-        console.log(value)
-    }, [value]);
+  const closeModalHandle = () => {
+    return setShow(false);
+  };
 
-    return (
-        <SearchBoxWrapper>
-            <SearchBoxInputContainer>
-                <SearchBoxInput placeholder='Text here...' value={value} onChange={(e) => setValue(e.target.value)} />
-                <SearchButton onClick={handleSubmmit}>
-                    Search
-                </SearchButton>
-                <SearchIcon />
-                <SearchFilterIcon onClick={() => console.log("Orejitaa")} />
-            </SearchBoxInputContainer>
-            <FilterModal />
-        </SearchBoxWrapper>
-
-    )
-}
+  return (
+    <SearchBoxWrapper>
+      <SearchBoxInputContainer>
+        <SearchBoxInput
+          placeholder="Text here..."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
+        <SearchButton onClick={handleSubmmit}>Search</SearchButton>
+        <SearchIcon />
+        <SearchFilterIcon onClick={() => setShow(true)} />
+      </SearchBoxInputContainer>
+      {show && <FilterModal closeModal={closeModalHandle} />}
+    </SearchBoxWrapper>
+  );
+};
