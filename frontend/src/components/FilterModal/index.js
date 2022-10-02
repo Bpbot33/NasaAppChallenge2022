@@ -41,11 +41,8 @@ export const FilterModal = ({ closeModal }) => {
       text: textValue,
     };
 
-    const selectForBackend = `metadata_storage_name${
-      filterObj.organizations && ","
-    }${filterObj.locations && ","}${filterObj.keyphrases && ","}${
-      filterObj.tags && ","
-    }${filterObj.text && ","}`;
+    const selectForBackend =
+      "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
 
     const searchForBacked = `${
       filterObj.people !== null ? "people:" + filterObj.people : "*"

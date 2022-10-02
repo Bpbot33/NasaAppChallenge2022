@@ -8,8 +8,7 @@ const publicController = {
     const skip = 0;
     const select =
       "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
-    const search =
-      "people:Tibbitts AND keyphrases:NASA AND organizations:NASA AND location:NASA AND imageTags:NASA";
+    const search = "*";
 
     const IAApiCall = await axiosCall({
       search: search,
@@ -20,7 +19,7 @@ const publicController = {
       top: 20,
     });
 
-    // console.log(IAApiCall?.data);
+    console.log(IAApiCall?.data);
 
     res.status(200).json({ msg: "entró" });
   },
