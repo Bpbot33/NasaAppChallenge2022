@@ -1,12 +1,18 @@
-import React from 'react'
-import { ResultsPageWrapper } from './ResultsPage.Styles'
+import React from "react";
+import {
+  ResultsContainer,
+  ResultsListContainer,
+  ResultsPageWrapper,
+} from "./ResultsPage.Styles";
 
 function ResultsPage() {
-    return (
-        <ResultsPageWrapper>
-            Results
-        </ResultsPageWrapper>
-    )
+  return (
+    <ResultsPageWrapper>
+      <ResultsContainer>
+        <ResultsListContainer>Holaaa</ResultsListContainer>
+      </ResultsContainer>
+    </ResultsPageWrapper>
+  );
 }
 
-export default ResultsPage
+export default ResultsPage;

@@ -23,6 +23,10 @@ export const FilterModalContainer = styled.div`
   justify-content: space-between;
   border-radius: 5px;
   background: rgba(217, 217, 217, 0.8);
+
+  @media (max-width: 800px) {
+    top: -100px;
+  }
 `;
 
 export const CloseButton = styled.div`

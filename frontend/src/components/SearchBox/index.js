@@ -11,7 +11,6 @@ import {
 
 export const SearchBox = () => {
   const [value, setValue] = useState("");
-
   const [show, setShow] = useState(false);
 
   const handleSubmmit = () => {
