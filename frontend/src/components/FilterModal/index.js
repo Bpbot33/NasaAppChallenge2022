@@ -14,22 +14,22 @@ import {
 
 export const FilterModal = ({ closeModal }) => {
   const [showPeople, setShowPeople] = useState(false);
-  const [peopleValue, setPeopleValue] = useState(null);
+  const [peopleValue, setPeopleValue] = useState("");
 
   const [showOrganizations, setShowOrganizations] = useState(false);
-  const [organizationsValue, setOrganizationsValue] = useState(null);
+  const [organizationsValue, setOrganizationsValue] = useState("");
 
   const [showLocations, setShowLocations] = useState(false);
-  const [locationsValue, setLocationsValue] = useState(null);
+  const [locationsValue, setLocationsValue] = useState("");
 
   const [showKeyPhrases, setShowKeyPhrases] = useState(false);
-  const [keyphrasesValue, setKeyphrasesValue] = useState(null);
+  const [keyphrasesValue, setKeyphrasesValue] = useState("");
 
   const [showImageTags, setShowImageTags] = useState(false);
-  const [imageTagsValue, setImageTagsValue] = useState(null);
+  const [imageTagsValue, setImageTagsValue] = useState("");
 
   const [showText, setShowText] = useState(false);
-  const [textValue, setTextValue] = useState(null);
+  const [textValue, setTextValue] = useState("");
 
   const addFilters = async () => {
     const filterObj = {
@@ -45,7 +45,7 @@ export const FilterModal = ({ closeModal }) => {
       "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
 
     const searchForBacked = `${
-      filterObj.people !== null ? "people:" + filterObj.people : "*"
+      filterObj.people !== "" ? "people:" + filterObj.people : "*"
     }${
       filterObj.organizations && " AND organizations:" + filterObj.organizations
     }${filterObj.locations && " AND location" + filterObj.locations}${

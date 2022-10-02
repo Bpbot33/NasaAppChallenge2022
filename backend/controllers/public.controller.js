@@ -6,9 +6,8 @@ const publicController = {
   searchPost: async (req, res) => {
     console.log(req.body);
     const skip = 0;
-    const select =
-      "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
-    const search = "*";
+    const select = req.body.select;
+    const search = req.body.search;
 
     const IAApiCall = await axiosCall({
       search: search,
@@ -19,9 +18,7 @@ const publicController = {
       top: 20,
     });
 
-    console.log(IAApiCall?.data);
-
-    res.status(200).json({ msg: "entró" });
+    res.status(200).json({ data: IAApiCall?.data });
   },
   searchResponse: async (req, res) => {
     res.status(200).json({ msg: "entró" });
