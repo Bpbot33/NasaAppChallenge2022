@@ -5,6 +5,7 @@ const router = express.Router();
 const publicController = require("../controllers/public.controller.js");
 
 /* HOME EXAMPLE */
-router.get("/", publicController.example);
+router.get("/search", publicController.searchResponse);
+router.post("/search", publicController.searchPost);
 
 module.exports = router;
