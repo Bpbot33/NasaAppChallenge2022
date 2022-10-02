@@ -4,7 +4,7 @@ const router = express.Router();
 /* CONTROLLER */
 const publicController = require("../controllers/public.controller.js");
 
-/* HOME EXAMPLE */
+/* SEARCH */
 router.get("/search", publicController.searchResponse);
 router.post("/search", publicController.searchPost);
 

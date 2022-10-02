@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axiosCall from "../../utils/axiosCall";
 import {
   CloseButton,
   Filter,
@@ -30,17 +31,43 @@ export const FilterModal = ({ closeModal }) => {
   const [showText, setShowText] = useState(false);
   const [textValue, setTextValue] = useState(null);
 
-  const addFilters = () => {
+  const addFilters = async () => {
     const filterObj = {
-      peopleValue,
-      organizationsValue,
-      locationsValue,
-      keyphrasesValue,
-      imageTagsValue,
-      textValue,
+      people: peopleValue,
+      organizations: organizationsValue,
+      locations: locationsValue,
+      keyphrases: keyphrasesValue,
+      tags: imageTagsValue,
+      text: textValue,
     };
 
+    const selectForBackend = `metadata_storage_name${
+      filterObj.organizations && ","
+    }${filterObj.locations && ","}${filterObj.keyphrases && ","}${
+      filterObj.tags && ","
+    }${filterObj.text && ","}`;
+
+    const searchForBacked = `${
+      filterObj.people !== null ? "people:" + filterObj.people : "*"
+    }${
+      filterObj.organizations && " AND organizations:" + filterObj.organizations
+    }${filterObj.locations && " AND location" + filterObj.locations}${
+      filterObj.keyphrases && " AND keyphrases" + filterObj.keyphrases
+    }${filterObj.tags && " AND imageTags" + filterObj.tags}${
+      filterObj.text && " AND text" + filterObj.text
+    }`;
+
+    const backendCall = await axiosCall({
+      search: searchForBacked,
+      skip: 0,
+      queryType: "full",
+      searchMode: "all",
+      select: selectForBackend,
+      top: 10,
+    });
+
     console.log(filterObj);
+    console.log(backendCall);
   };
 
   return (

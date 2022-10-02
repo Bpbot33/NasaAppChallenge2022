@@ -4,16 +4,23 @@ const axiosCall = require("../utils/axiosCall");
 const publicController = {
   /* SEARCH ROUTE */
   searchPost: async (req, res) => {
-    // const IACall = axiosCall({
-    //   search: "people:Tibbitts",
-    //   skip: 0,
-    //   queryType: "full",
-    //   searchMode: "all",
-    //   select: "metadata_storage_name,people, keyphrases",
-    //   top: 10,
-    // });
-
     console.log(req.body);
+    const skip = 0;
+    const select =
+      "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
+    const search =
+      "people:Tibbitts AND keyphrases:NASA AND organizations:NASA AND location:NASA AND imageTags:NASA";
+
+    const IAApiCall = await axiosCall({
+      search: search,
+      skip: skip,
+      queryType: "full",
+      searchMode: "all",
+      select: select,
+      top: 20,
+    });
+
+    // console.log(IAApiCall?.data);
 
     res.status(200).json({ msg: "entró" });
   },
