@@ -43,7 +43,7 @@ export const FilterModalButton = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   color: white;
   background-color: #0b3d91;
   border-radius: 5px;
@@ -73,16 +73,15 @@ export const FilterCheckBox = styled.input.attrs({ type: "checkbox" })`
 export const FilterTitle = styled.p`
   padding: 0;
   margin: 0;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 20px;
-  line-height: 110%;
   color: black;
 `;
 
 export const FilterInput = styled.input.attrs({ type: "text" })`
   height: 20ox;
   width: 220px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 18px;
   border: none;
   border-bottom: 2px solid #0b3d91;
@@ -94,7 +93,7 @@ export const FilterInput = styled.input.attrs({ type: "text" })`
 
   &::placeholder {
     color: rgba(46, 44, 44, 0.8);
-    font-weight: 600;
+    font-weight: 700;
     font-size: 18px;
   }
 `;
