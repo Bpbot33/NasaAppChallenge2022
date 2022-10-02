@@ -63,8 +63,7 @@ export const FilterModal = ({ closeModal }) => {
       top: 10,
     });
 
-    console.log(filterObj);
-    console.log(backendCall);
+    console.log(backendCall.data.data);
   };
 
   return (
