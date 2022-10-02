@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axiosCall from "../../utils/axiosCall";
+import { useDispatch, useSelector } from "react-redux";
+import { openCloseFiltersModal } from "../../state/app/appActions";
+
 import {
   CloseButton,
   Filter,
@@ -12,7 +15,9 @@ import {
   FilterTitle,
 } from "./FilterModal.styles";
 
-export const FilterModal = ({ closeModal }) => {
+export const FilterModal = () => {
+  const dispatch = useDispatch();
+
   const [showPeople, setShowPeople] = useState(false);
   const [peopleValue, setPeopleValue] = useState("");
 
@@ -69,7 +74,7 @@ export const FilterModal = ({ closeModal }) => {
   return (
     <FilterModalWrapper>
       <FilterModalContainer>
-        <CloseButton onClick={closeModal} />
+        <CloseButton onClick={() => dispatch(openCloseFiltersModal(false))} />
         <FiltersContainer>
           <Filter>
             <FilterCheckBox onClick={() => setShowPeople(!showPeople)} />

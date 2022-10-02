@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { FilterModal } from "../FilterModal";
+import { useDispatch, useSelector } from "react-redux";
+import { openCloseFiltersModal } from "../../state/app/appActions";
+
 import {
   SearchBoxInput,
   SearchBoxInputContainer,
@@ -11,14 +14,11 @@ import {
 
 export const SearchBox = () => {
   const [value, setValue] = useState("");
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+  const { menuOpenFilters } = useSelector((state) => state.app);
 
   const handleSubmmit = () => {
     console.log("Submmit");
-  };
-
-  const closeModalHandle = () => {
-    return setShow(false);
   };
 
   return (
@@ -31,9 +31,11 @@ export const SearchBox = () => {
         />
         <SearchButton onClick={handleSubmmit}>Search</SearchButton>
         <SearchIcon />
-        <SearchFilterIcon onClick={() => setShow(true)} />
+        <SearchFilterIcon
+          onClick={() => dispatch(openCloseFiltersModal(true))}
+        />
       </SearchBoxInputContainer>
-      {show && <FilterModal closeModal={closeModalHandle} />}
+      {menuOpenFilters && <FilterModal />}
     </SearchBoxWrapper>
   );
 };
