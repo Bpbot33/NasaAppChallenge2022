@@ -2,7 +2,10 @@ import axios from "axios";
 
 export default async function axiosCall(body) {
   const URL = "http://localhost:5000/search";
-  const headers = { "Content-Type": "application/json" };
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  };
 
   try {
     const res = await axios({
