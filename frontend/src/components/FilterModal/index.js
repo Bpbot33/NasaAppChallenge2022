@@ -1,7 +1,20 @@
 import React, { useState } from "react";
-import axiosCall from "../../utils/axiosCall";
-import { useDispatch, useSelector } from "react-redux";
-import { openCloseFiltersModal } from "../../state/app/appActions";
+import { useDispatch } from "react-redux";
+import {
+  onSetFilters,
+  openCloseFiltersModal,
+} from "../../state/app/appActions";
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 import {
   CloseButton,
@@ -46,9 +59,6 @@ export const FilterModal = () => {
       text: textValue,
     };
 
-    const selectForBackend =
-      "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
-
     const searchForBacked = `${
       filterObj.people !== "" ? "people:" + filterObj.people : "*"
     }${
@@ -58,18 +68,41 @@ export const FilterModal = () => {
     }${filterObj.tags && " AND imageTags" + filterObj.tags}${
       filterObj.text && " AND text" + filterObj.text
     }`;
-
-    const backendCall = await axiosCall({
-      search: searchForBacked,
-      skip: 0,
-      queryType: "full",
-      searchMode: "all",
-      select: selectForBackend,
-      top: 10,
-    });
-
-    console.log(backendCall.data.data);
+    dispatch(onSetFilters(searchForBacked));
   };
+
+  // ChartJS.register(
+  //   CategoryScale,
+  //   LinearScale,
+  //   BarElement,
+  //   Title,
+  //   Tooltip,
+  //   Legend
+  // );
+
+  // const data = {
+  //   labels: chartLabels,
+  //   datasets: [
+  //     {
+  //       label: "Dataset 1",
+  //       data: chartData,
+  //       backgroundColor: "rgba(255, 99, 132, 0.5)",
+  //     },
+  //   ],
+  // };
+
+  // const options = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       position: "top",
+  //     },
+  //     title: {
+  //       display: true,
+  //       text: "Chart.js Bar Chart",
+  //     },
+  //   },
+  // };
 
   return (
     <FilterModalWrapper>
@@ -77,7 +110,16 @@ export const FilterModal = () => {
         <CloseButton onClick={() => dispatch(openCloseFiltersModal(false))} />
         <FiltersContainer>
           <Filter>
-            <FilterCheckBox onClick={() => setShowPeople(!showPeople)} />
+            <FilterCheckBox
+              onClick={() => {
+                if (!showPeople) {
+                  setShowPeople(true);
+                } else {
+                  setShowPeople(false);
+                  setPeopleValue("");
+                }
+              }}
+            />
             {!showPeople ? (
               <FilterTitle>People</FilterTitle>
             ) : (
@@ -90,7 +132,14 @@ export const FilterModal = () => {
           </Filter>
           <Filter>
             <FilterCheckBox
-              onClick={() => setShowOrganizations(!showOrganizations)}
+              onClick={() => {
+                if (!showPeople) {
+                  setShowOrganizations(true);
+                } else {
+                  setShowOrganizations(false);
+                  setOrganizationsValue("");
+                }
+              }}
             />
             {!showOrganizations ? (
               <FilterTitle> Organizations </FilterTitle>
@@ -103,7 +152,16 @@ export const FilterModal = () => {
             )}
           </Filter>
           <Filter>
-            <FilterCheckBox onClick={() => setShowLocations(!showLocations)} />
+            <FilterCheckBox
+              onClick={() => {
+                if (!showPeople) {
+                  setShowLocations(true);
+                } else {
+                  setShowLocations(false);
+                  setLocationsValue("");
+                }
+              }}
+            />
             {!showLocations ? (
               <FilterTitle>Locations</FilterTitle>
             ) : (
@@ -116,7 +174,14 @@ export const FilterModal = () => {
           </Filter>
           <Filter>
             <FilterCheckBox
-              onClick={() => setShowKeyPhrases(!showKeyPhrases)}
+              onClick={() => {
+                if (!showPeople) {
+                  setShowKeyPhrases(true);
+                } else {
+                  setShowKeyPhrases(false);
+                  setKeyphrasesValue("");
+                }
+              }}
             />
             {!showKeyPhrases ? (
               <FilterTitle>Keyphrases</FilterTitle>
@@ -129,7 +194,16 @@ export const FilterModal = () => {
             )}
           </Filter>
           <Filter>
-            <FilterCheckBox onClick={() => setShowImageTags(!showImageTags)} />
+            <FilterCheckBox
+              onClick={() => {
+                if (!showPeople) {
+                  setShowImageTags(true);
+                } else {
+                  setShowImageTags(false);
+                  setImageTagsValue("");
+                }
+              }}
+            />
             {!showImageTags ? (
               <FilterTitle>Image Tags</FilterTitle>
             ) : (
@@ -141,7 +215,16 @@ export const FilterModal = () => {
             )}
           </Filter>
           <Filter>
-            <FilterCheckBox onClick={() => setShowText(!showText)} />
+            <FilterCheckBox
+              onClick={() => {
+                if (!showPeople) {
+                  setShowText(true);
+                } else {
+                  setShowText(false);
+                  setTextValue("");
+                }
+              }}
+            />
             {!showText ? (
               <FilterTitle>Text</FilterTitle>
             ) : (
@@ -154,6 +237,7 @@ export const FilterModal = () => {
           </Filter>
         </FiltersContainer>
         <FilterModalButton onClick={addFilters}>Add Filters</FilterModalButton>
+        {/* {showChart && <Bar options={options} data={data} />} */}
       </FilterModalContainer>
     </FilterModalWrapper>
   );
