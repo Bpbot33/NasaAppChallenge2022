@@ -198,19 +198,27 @@ function ResultsPage() {
           {resultsDataForCharts.length >= 0 && (
             <Bar options={optionsPeople} data={dataPeople} />
           )}
-          <br />
+        </ResultsListContainer>
+        <br />
+        <ResultsListContainer>
           {resultsDataForCharts.length >= 0 && (
             <Bar options={optionsKeys} data={dataKeys} />
           )}
-          <br />
+        </ResultsListContainer>
+        <br />
+        <ResultsListContainer>
           {resultsDataForCharts.length >= 0 && (
             <Bar options={optionsOrgs} data={dataOrgs} />
           )}
-          <br />
+        </ResultsListContainer>
+        <br />
+        <ResultsListContainer>
           {resultsDataForCharts.length >= 0 && (
             <Bar options={optionsLocations} data={dataLocations} />
           )}
-          <br />
+        </ResultsListContainer>
+        <br />
+        <ResultsListContainer>
           {resultsDataForCharts.length >= 0 && (
             <Bar options={optionsTags} data={dataTags} />
           )}
