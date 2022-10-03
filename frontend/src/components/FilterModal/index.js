@@ -6,17 +6,6 @@ import {
 } from "../../state/app/appActions";
 
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Bar } from "react-chartjs-2";
-
-import {
   CloseButton,
   Filter,
   FilterCheckBox,
@@ -70,39 +59,6 @@ export const FilterModal = () => {
     }`;
     dispatch(onSetFilters(searchForBacked));
   };
-
-  // ChartJS.register(
-  //   CategoryScale,
-  //   LinearScale,
-  //   BarElement,
-  //   Title,
-  //   Tooltip,
-  //   Legend
-  // );
-
-  // const data = {
-  //   labels: chartLabels,
-  //   datasets: [
-  //     {
-  //       label: "Dataset 1",
-  //       data: chartData,
-  //       backgroundColor: "rgba(255, 99, 132, 0.5)",
-  //     },
-  //   ],
-  // };
-
-  // const options = {
-  //   responsive: true,
-  //   plugins: {
-  //     legend: {
-  //       position: "top",
-  //     },
-  //     title: {
-  //       display: true,
-  //       text: "Chart.js Bar Chart",
-  //     },
-  //   },
-  // };
 
   return (
     <FilterModalWrapper>
@@ -237,7 +193,6 @@ export const FilterModal = () => {
           </Filter>
         </FiltersContainer>
         <FilterModalButton onClick={addFilters}>Add Filters</FilterModalButton>
-        {/* {showChart && <Bar options={options} data={data} />} */}
       </FilterModalContainer>
     </FilterModalWrapper>
   );

@@ -23,13 +23,11 @@ export const SearchBox = () => {
   const { menuOpenFilters, filters } = useSelector((state) => state.app);
 
   const handleSubmmit = async () => {
-    console.log("Submmit");
-
     const selectForBackend =
       "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
 
     const backendCall = await axiosCall({
-      search: filters === "'people':'*'" ? `'search':'${value}'` : filters,
+      search: !filters ? `'${value}'` : filters,
       skip: 0,
       queryType: "full",
       searchMode: "all",
@@ -37,7 +35,31 @@ export const SearchBox = () => {
       top: 10,
     });
 
-    // console.log(backendCall.data.data);
+    // console.log(backendCall.data.data.value);
+    // backendCall.data.data.value.forEach((el) => {
+    //   // if (typeof el === )
+    //   console.log(typeof el);
+    // });
+
+    // Object.entries(backendCall.data.data.value).forEach((el) => {
+    //   // console.log("element", el[1]);
+    //   Object.entries(el[1]).forEach((el) => {
+    //     if (typeof el[1] === "object") {
+    //       console.log(el[1]);
+    //       console.log(el[1].length);
+    //       let newArr = [];
+    //       // el[1].forEach((innerArr) => {
+    //       //   newArr.concat(innerArr);
+    //       // });
+    //       // el[1] = newArr;
+    //       // for (let innerArr in el[1]) {
+    //       //   console.log("inner", innerArr);
+    //       // }
+    //       // console.log(newArr);
+    //     }
+    //   });
+    // });
+    // Array.prototype.push.apply(arr1, arr2);
     function obtengoListadoAtributo(datos, atributo) {
       var resultado = [];
       for (let llave in datos) {
@@ -98,31 +120,12 @@ export const SearchBox = () => {
 
     datosAnalizar.forEach((el) => {
       let datosAGraficar = preparacionData(backendCall.data.data.value, el, 10);
-      console.log(el);
       allDataForCharts.push([el, datosAGraficar]);
     });
 
-    // function obtenerLabels(datos) {
-    //   let llaves = [];
-    //   for (let indices in datos) {
-    //     llaves.push(Object.keys(datos[indices])[0]);
-    //   }
-    //   return llaves;
-    // }
-
-    // function obtenerValores(datos) {
-    //   let valores = [];
-    //   for (let indices in datos) {
-    //     valores.push(Object.values(datos[indices])[0]);
-    //   }
-    //   return valores;
-    // }
-
-    // setChartLabels(obtenerLabels(allDataForCharts[0][1]));
-    // setChartData(obtenerValores(allDataForCharts[0][1]));
-
     dispatch(onSetResultsData(backendCall.data.data.value));
     dispatch(onSetResultsDataForCharts(allDataForCharts));
+    window.location.href = "/results";
   };
 
   return (

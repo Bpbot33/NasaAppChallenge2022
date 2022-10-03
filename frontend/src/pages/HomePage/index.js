@@ -1,5 +1,4 @@
 import React from "react";
-import Graphs from "../../components/Graphs";
 import { SearchBox } from "../../components/SearchBox";
 import { HomePageContainer, HomePageWrapper } from "./HomePage.styles";
 
@@ -8,7 +7,6 @@ function HomePage() {
     <HomePageWrapper>
       <HomePageContainer>
         <SearchBox />
-        <Graphs />
       </HomePageContainer>
     </HomePageWrapper>
   );
