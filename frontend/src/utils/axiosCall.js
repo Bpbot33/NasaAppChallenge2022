@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export default async function axiosCall(body) {
-  const URL = "http://localhost:5000/search";
+  const URL =
+    "http://ec2-52-67-40-124.sa-east-1.compute.amazonaws.com:5000/search";
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
