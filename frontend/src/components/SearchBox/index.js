@@ -16,13 +16,16 @@ import {
   SearchIcon,
 } from "./SearchBox.styles";
 import axiosCall from "../../utils/axiosCall";
+import LoadingModal from "../Loadings/LoadingModal";
 
 export const SearchBox = () => {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
   const { menuOpenFilters, filters } = useSelector((state) => state.app);
+  const [showLoader, setShowLoader] = useState(false);
 
   const handleSubmmit = async () => {
+    setShowLoader(true);
     const selectForBackend =
       "metadata_storage_name,people,keyphrases,organizations,locations,imageTags";
 
@@ -35,31 +38,6 @@ export const SearchBox = () => {
       top: 10,
     });
 
-    // console.log(backendCall.data.data.value);
-    // backendCall.data.data.value.forEach((el) => {
-    //   // if (typeof el === )
-    //   console.log(typeof el);
-    // });
-
-    // Object.entries(backendCall.data.data.value).forEach((el) => {
-    //   // console.log("element", el[1]);
-    //   Object.entries(el[1]).forEach((el) => {
-    //     if (typeof el[1] === "object") {
-    //       console.log(el[1]);
-    //       console.log(el[1].length);
-    //       let newArr = [];
-    //       // el[1].forEach((innerArr) => {
-    //       //   newArr.concat(innerArr);
-    //       // });
-    //       // el[1] = newArr;
-    //       // for (let innerArr in el[1]) {
-    //       //   console.log("inner", innerArr);
-    //       // }
-    //       // console.log(newArr);
-    //     }
-    //   });
-    // });
-    // Array.prototype.push.apply(arr1, arr2);
     function obtengoListadoAtributo(datos, atributo) {
       var resultado = [];
       for (let llave in datos) {
@@ -125,6 +103,8 @@ export const SearchBox = () => {
 
     dispatch(onSetResultsData(backendCall.data.data.value));
     dispatch(onSetResultsDataForCharts(allDataForCharts));
+    setShowLoader(false);
+
     window.location.href = "/results";
   };
 
@@ -143,6 +123,7 @@ export const SearchBox = () => {
         />
       </SearchBoxInputContainer>
       {menuOpenFilters && <FilterModal />}
+      {showLoader && <LoadingModal />}
     </SearchBoxWrapper>
   );
 };

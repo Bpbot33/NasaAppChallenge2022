@@ -223,7 +223,6 @@ function ResultsPage() {
             <Bar options={optionsTags} data={dataTags} />
           )}
         </ResultsListContainer>
-        {/* <ResultsListContainer>Holaaa</ResultsListContainer> */}
       </ResultsContainer>
     </ResultsPageWrapper>
   );
