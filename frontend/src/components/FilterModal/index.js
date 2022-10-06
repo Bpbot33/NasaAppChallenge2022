@@ -58,6 +58,8 @@ export const FilterModal = () => {
       filterObj.text && " AND text" + filterObj.text
     }`;
     dispatch(onSetFilters(searchForBacked));
+    dispatch(searchForBacked);
+    dispatch(openCloseFiltersModal(false));
   };
 
   return (
