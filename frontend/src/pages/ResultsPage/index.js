@@ -196,9 +196,11 @@ function ResultsPage() {
     },
   };
 
+  console.log(resultsData);
+
   return (
     <ResultsPageWrapper>
-      {resultsDataForCharts.length >= 0 ? (
+      {resultsData.length > 0 ? (
         <ResultsContainer>
           <ResultHeader>Statistics</ResultHeader>
           <ResultsListContainer style={{ width: "80%" }}>
