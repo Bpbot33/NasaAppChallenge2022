@@ -9,14 +9,19 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
+  PointElement,
+  Filler,
 } from "chart.js";
-import { Bar } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 
 import {
+  ResultHeader,
   ResultsContainer,
   ResultsListContainer,
   ResultsPageWrapper,
 } from "./ResultsPage.Styles";
+import Table from "../../components/Table";
 
 function ResultsPage() {
   const { resultsData, resultsDataForCharts } = useSelector(
@@ -45,12 +50,6 @@ function ResultsPage() {
   const arrLocation = resultsDataForCharts[3][1];
   const arrTags = resultsDataForCharts[4][1];
 
-  // console.log(arrPeople);
-  // console.log(arrKeys);
-  // console.log(arrOrganizations);
-  // console.log(arrLocation);
-  // console.log(arrTags);
-
   const labelPeople = obtenerLabels(arrPeople);
   const valuesPeople = obtenerValores(arrPeople);
   const labelKeys = obtenerLabels(arrKeys);
@@ -65,9 +64,12 @@ function ResultsPage() {
   ChartJS.register(
     CategoryScale,
     LinearScale,
+    PointElement,
+    ArcElement,
     BarElement,
     Title,
     Tooltip,
+    Filler,
     Legend
   );
 
@@ -101,7 +103,8 @@ function ResultsPage() {
       {
         label: "Dataset 1",
         data: valuesKeys,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderWidth: 1,
       },
     ],
   };
@@ -126,6 +129,8 @@ function ResultsPage() {
         label: "Dataset 1",
         data: valuesOrgs,
         backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderWidth: 1,
+        fill: true,
       },
     ],
   };
@@ -193,37 +198,45 @@ function ResultsPage() {
 
   return (
     <ResultsPageWrapper>
-      <ResultsContainer>
-        <ResultsListContainer>
-          {resultsDataForCharts.length >= 0 && (
-            <Bar options={optionsPeople} data={dataPeople} />
-          )}
-        </ResultsListContainer>
-        <br />
-        <ResultsListContainer>
-          {resultsDataForCharts.length >= 0 && (
-            <Bar options={optionsKeys} data={dataKeys} />
-          )}
-        </ResultsListContainer>
-        <br />
-        <ResultsListContainer>
-          {resultsDataForCharts.length >= 0 && (
-            <Bar options={optionsOrgs} data={dataOrgs} />
-          )}
-        </ResultsListContainer>
-        <br />
-        <ResultsListContainer>
-          {resultsDataForCharts.length >= 0 && (
-            <Bar options={optionsLocations} data={dataLocations} />
-          )}
-        </ResultsListContainer>
-        <br />
-        <ResultsListContainer>
-          {resultsDataForCharts.length >= 0 && (
-            <Bar options={optionsTags} data={dataTags} />
-          )}
-        </ResultsListContainer>
-      </ResultsContainer>
+      {resultsDataForCharts.length >= 0 ? (
+        <ResultsContainer>
+          <ResultHeader>Statistics</ResultHeader>
+          <ResultsListContainer style={{ width: "80%" }}>
+            {resultsDataForCharts.length >= 0 && (
+              <Bar options={optionsPeople} data={dataPeople} />
+            )}
+          </ResultsListContainer>
+          <br />
+          <ResultsListContainer style={{ width: "50%" }}>
+            {resultsDataForCharts.length >= 0 && (
+              <Pie data={dataKeys} options={optionsKeys} />
+            )}
+          </ResultsListContainer>
+
+          <br />
+          <ResultsListContainer style={{ width: "80%" }}>
+            {resultsDataForCharts.length >= 0 && (
+              <Bar options={optionsLocations} data={dataLocations} />
+            )}
+          </ResultsListContainer>
+          <br />
+          <ResultsListContainer style={{ width: "50%" }}>
+            {resultsDataForCharts.length >= 0 && (
+              <Pie options={optionsOrgs} data={dataOrgs} />
+            )}
+          </ResultsListContainer>
+          <br />
+          <ResultsListContainer style={{ width: "80%" }}>
+            {resultsDataForCharts.length >= 0 && (
+              <Bar options={optionsTags} data={dataTags} />
+            )}
+          </ResultsListContainer>
+          <br />
+          <Table data={resultsData} />
+        </ResultsContainer>
+      ) : (
+        <ResultsContainer>No results</ResultsContainer>
+      )}
     </ResultsPageWrapper>
   );
 }

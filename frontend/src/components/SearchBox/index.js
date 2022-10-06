@@ -116,7 +116,12 @@ export const SearchBox = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <SearchButton onClick={handleSubmmit}>Search</SearchButton>
+        <SearchButton
+          onClick={value !== "" ? handleSubmmit : null}
+          isDisabled={value !== "" ? false : true}
+        >
+          Search
+        </SearchButton>
         <SearchIcon />
         <SearchFilterIcon
           onClick={() => dispatch(openCloseFiltersModal(true))}

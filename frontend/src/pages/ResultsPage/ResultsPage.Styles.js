@@ -33,3 +33,13 @@ export const ResultsListContainer = styled.div`
   border-radius: 5px;
   background-color: #d9d9d9;
 `;
+
+export const ResultHeader = styled.p`
+  width: 60%;
+  height: fit-content;
+  font-size: 24px;
+  padding: 0;
+  text-align: center;
+  border-bottom: 2px solid white;
+  font-weight: 800;
+`;

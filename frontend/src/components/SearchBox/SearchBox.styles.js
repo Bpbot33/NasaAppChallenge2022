@@ -82,4 +82,5 @@ export const SearchButton = styled.button`
   background-color: #0b3d91;
   border-radius: 5px;
   border: none;
+  cursor: ${(props) => (props.isDisabled === true ? "not-allowed" : "pointer")};
 `;

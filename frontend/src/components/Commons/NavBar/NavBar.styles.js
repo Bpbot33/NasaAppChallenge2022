@@ -29,6 +29,7 @@ export const NavBarLogo = styled.div`
   width: 70px;
   background: url(${nasaLogo}) center no-repeat;
   background-size: 100%;
+  cursor: pointer;
 `;
 export const NavBarContainer = styled.div`
   padding: 0 auto;

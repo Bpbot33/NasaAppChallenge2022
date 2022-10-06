@@ -1,17 +1,24 @@
-import React from 'react'
-import { NavBarContainer, NavBarLogo, NavBarTitle, NavbarWrapper } from './NavBar.styles'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+import {
+  NavBarContainer,
+  NavBarLogo,
+  NavBarTitle,
+  NavbarWrapper,
+} from "./NavBar.styles";
 
 const NavBar = () => {
-    return (
-        <NavbarWrapper>
-            <NavBarContainer>
-                <NavBarLogo />
-                <NavBarTitle>
-                    NTRS - NASA Technical Reports Search
-                </NavBarTitle>
-            </NavBarContainer>
-        </NavbarWrapper>
-    )
-}
+  let navigate = useNavigate();
+  console.log(window.location.host);
+  return (
+    <NavbarWrapper>
+      <NavBarContainer>
+        <NavBarLogo onClick={() => navigate("/")} />
+        <NavBarTitle>NTRS - NASA Technical Reports Search</NavBarTitle>
+      </NavBarContainer>
+    </NavbarWrapper>
+  );
+};
 
-export default NavBar
+export default NavBar;
