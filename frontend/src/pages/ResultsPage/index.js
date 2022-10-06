@@ -196,8 +196,6 @@ function ResultsPage() {
     },
   };
 
-  console.log(resultsData);
-
   return (
     <ResultsPageWrapper>
       {resultsData.length > 0 ? (
